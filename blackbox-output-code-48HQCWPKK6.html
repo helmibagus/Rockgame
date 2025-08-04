@@ -1,0 +1,244 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Rock, Paper, Scissors - Best of 5
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      min-height: 100vh;
+    }
+  </style>
+ </head>
+ <body class="flex flex-col items-center justify-center p-4">
+  <main class="bg-white bg-opacity-10 backdrop-blur-md rounded-lg shadow-lg max-w-5xl w-full p-6 flex flex-row items-center justify-center border border-white border-opacity-20 gap-12">
+   <div class="flex-shrink-0 flex flex-col justify-center items-center max-w-[140px] text-center">
+    <img alt="Logo on the left side: stylized letter or symbol with dark background" class="w-24 h-24 rounded-full object-cover mb-4" src="https://pbs.twimg.com/profile_images/1380009238076948480/eyVxXqmH_400x400.jpg" width="96" height="96"/>
+    <p class="text-white text-sm leading-tight">
+     Enthusiast of @Ethereum_OS, always on the hunt for $AIR rewards. Part of the @Ethereum_OS wave 🌊 Living for the $AIR drop.
+    </p>
+   </div>
+   <section class="flex flex-col items-center justify-center max-w-md w-full">
+    <h1 class="text-4xl font-bold mb-6 text-white text-center">
+     Rock, Paper, Scissors
+    </h1>
+    <p class="text-gray-300 mb-8 text-center max-w-sm">
+     Player chooses rock/paper/scissors, play against the computer. Best of 5 mode.
+    </p>
+    <div class="flex justify-center space-x-8 mb-8">
+     <button aria-label="Choose Rock" class="flex flex-col items-center focus:outline-none focus:ring-4 focus:ring-blue-400 rounded transition transform hover:scale-110" id="btn-rock">
+      <img alt="Illustration of a gray fist hand representing rock" class="w-24 h-24 mb-3" draggable="false" height="96" src="https://storage.googleapis.com/a1aa/image/48a8aa8c-649b-4e9d-0d0c-7a525e273ff7.jpg" width="96"/>
+      <span class="text-white font-semibold text-lg">
+       Rock
+      </span>
+     </button>
+     <button aria-label="Choose Paper" class="flex flex-col items-center focus:outline-none focus:ring-4 focus:ring-blue-400 rounded transition transform hover:scale-110" id="btn-paper">
+      <img alt="Illustration of an open white hand representing paper" class="w-24 h-24 mb-3" draggable="false" height="96" src="https://storage.googleapis.com/a1aa/image/87b52af8-9b6d-42ac-6dda-17b337e46eee.jpg" width="96"/>
+      <span class="text-white font-semibold text-lg">
+       Paper
+      </span>
+     </button>
+     <button aria-label="Choose Scissors" class="flex flex-col items-center focus:outline-none focus:ring-4 focus:ring-blue-400 rounded transition transform hover:scale-110" id="btn-scissors">
+      <img alt="Illustration of a light blue hand forming scissors with two fingers" class="w-24 h-24 mb-3" draggable="false" height="96" src="https://storage.googleapis.com/a1aa/image/ff7eb694-3200-4ab2-68f7-838e1e6be5d0.jpg" width="96"/>
+      <span class="text-white font-semibold text-lg">
+       Scissors
+      </span>
+     </button>
+    </div>
+    <div class="w-full bg-white bg-opacity-20 rounded-lg p-6 mb-8 border border-white border-opacity-30">
+     <h2 class="text-2xl font-semibold text-center mb-5 text-white">
+      Result
+     </h2>
+     <div class="flex justify-around items-center mb-5">
+      <div class="text-center">
+       <p class="text-sm text-gray-300 mb-1">
+        Player
+       </p>
+       <p class="text-2xl font-bold text-blue-300 min-h-[28px]" id="player-choice">
+        -
+       </p>
+      </div>
+      <div class="text-center">
+       <p class="text-sm text-gray-300 mb-1">
+        Computer
+       </p>
+       <p class="text-2xl font-bold text-red-400 min-h-[28px]" id="computer-choice">
+        -
+       </p>
+      </div>
+     </div>
+     <p class="text-center text-xl font-semibold text-gray-200 min-h-[32px]" id="round-result">
+     </p>
+    </div>
+    <div class="w-full bg-white bg-opacity-20 rounded-lg p-6 mb-8 border border-white border-opacity-30">
+     <h2 class="text-2xl font-semibold text-center mb-5 text-white">
+      Score
+     </h2>
+     <div class="flex justify-around text-white font-bold text-xl">
+      <div>
+       Player:
+       <span id="player-score">
+        0
+       </span>
+      </div>
+      <div>
+       Computer:
+       <span id="computer-score">
+        0
+       </span>
+      </div>
+     </div>
+    </div>
+    <div class="w-full text-center mb-6">
+     <p class="text-2xl font-extrabold text-green-400 min-h-[32px]" id="match-winner">
+     </p>
+    </div>
+    <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-10 rounded focus:outline-none focus:ring-4 focus:ring-blue-400 transition" id="btn-reset">
+     Restart
+    </button>
+   </section>
+   <div class="flex-shrink-0 flex flex-col justify-center items-center max-w-[140px] text-center">
+    <img alt="Logo on the right side: stylized letter or symbol with dark background" class="w-24 h-24 rounded-full object-cover mb-4" src="https://pbs.twimg.com/profile_images/1927690030455341057/pAFgpio-_400x400.jpg" width="96" height="96"/>
+    <p class="text-white text-sm leading-tight">
+     DeFi's largest gamified experiment: a recursive flywheel of seven composable mechanics designed for users to create like never before.
+    </p>
+   </div>
+  </main>
+  <footer class="mt-8 text-center text-white select-none text-3xl font-extrabold">
+   ©2025 Build By @Cryptobillkey
+  </footer>
+  <audio id="bg-music" loop>
+   <source src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_3a3a3a3a3a.mp3?filename=relaxing-music-ambient-11207.mp3" type="audio/mpeg"/>
+   Your browser does not support the audio element.
+  </audio>
+  <script>
+   const music = document.getElementById('bg-music');
+
+   const choices = ['Rock', 'Paper', 'Scissors'];
+   const btnRock = document.getElementById('btn-rock');
+   const btnPaper = document.getElementById('btn-paper');
+   const btnScissors = document.getElementById('btn-scissors');
+   const playerChoiceEl = document.getElementById('player-choice');
+   const computerChoiceEl = document.getElementById('computer-choice');
+   const roundResultEl = document.getElementById('round-result');
+   const playerScoreEl = document.getElementById('player-score');
+   const computerScoreEl = document.getElementById('computer-score');
+   const matchWinnerEl = document.getElementById('match-winner');
+   const btnReset = document.getElementById('btn-reset');
+
+   let playerScore = 0;
+   let computerScore = 0;
+   let roundsPlayed = 0;
+   const maxRounds = 5;
+   let musicStarted = false;
+
+   function computerPlay() {
+     const randomIndex = Math.floor(Math.random() * choices.length);
+     return choices[randomIndex];
+   }
+
+   function determineWinner(player, computer) {
+     if (player === computer) return 'Draw';
+     if (
+       (player === 'Rock' && computer === 'Scissors') ||
+       (player === 'Paper' && computer === 'Rock') ||
+       (player === 'Scissors' && computer === 'Paper')
+     ) {
+       return 'Player';
+     }
+     return 'Computer';
+   }
+
+   function updateScores(winner) {
+     if (winner === 'Player') playerScore++;
+     else if (winner === 'Computer') computerScore++;
+   }
+
+   function checkMatchWinner() {
+     if (playerScore >= 3) {
+       matchWinnerEl.textContent = '🎉 Player wins Best of 5! 🎉';
+       disableButtons(true);
+     } else if (computerScore >= 3) {
+       matchWinnerEl.textContent = '💻 Computer wins Best of 5! 💻';
+       disableButtons(true);
+     }
+   }
+
+   function disableButtons(disable) {
+     btnRock.disabled = disable;
+     btnPaper.disabled = disable;
+     btnScissors.disabled = disable;
+     if (disable) {
+       btnRock.classList.add('opacity-50', 'cursor-not-allowed');
+       btnPaper.classList.add('opacity-50', 'cursor-not-allowed');
+       btnScissors.classList.add('opacity-50', 'cursor-not-allowed');
+     } else {
+       btnRock.classList.remove('opacity-50', 'cursor-not-allowed');
+       btnPaper.classList.remove('opacity-50', 'cursor-not-allowed');
+       btnScissors.classList.remove('opacity-50', 'cursor-not-allowed');
+     }
+   }
+
+   function playRound(playerSelection) {
+     if (!musicStarted) {
+       music.play().catch(() => {});
+       musicStarted = true;
+     }
+     if (playerScore >= 3 || computerScore >= 3) return;
+
+     const computerSelection = computerPlay();
+     playerChoiceEl.textContent = playerSelection;
+     computerChoiceEl.textContent = computerSelection;
+
+     const winner = determineWinner(playerSelection, computerSelection);
+     if (winner === 'Draw') {
+       roundResultEl.textContent = 'Result: Draw!';
+       roundResultEl.classList.remove('text-green-600', 'text-red-600');
+       roundResultEl.classList.add('text-gray-200');
+     } else if (winner === 'Player') {
+       roundResultEl.textContent = 'Result: You win this round!';
+       roundResultEl.classList.remove('text-gray-200', 'text-red-600');
+       roundResultEl.classList.add('text-green-400');
+     } else {
+       roundResultEl.textContent = 'Result: Computer wins this round!';
+       roundResultEl.classList.remove('text-green-400', 'text-gray-200');
+       roundResultEl.classList.add('text-red-400');
+     }
+
+     updateScores(winner);
+     playerScoreEl.textContent = playerScore;
+     computerScoreEl.textContent = computerScore;
+
+     roundsPlayed++;
+     checkMatchWinner();
+   }
+
+   btnRock.addEventListener('click', () => playRound('Rock'));
+   btnPaper.addEventListener('click', () => playRound('Paper'));
+   btnScissors.addEventListener('click', () => playRound('Scissors'));
+
+   btnReset.addEventListener('click', () => {
+     playerScore = 0;
+     computerScore = 0;
+     roundsPlayed = 0;
+     playerChoiceEl.textContent = '-';
+     computerChoiceEl.textContent = '-';
+     roundResultEl.textContent = '';
+     playerScoreEl.textContent = '0';
+     computerScoreEl.textContent = '0';
+     matchWinnerEl.textContent = '';
+     disableButtons(false);
+     music.pause();
+     music.currentTime = 0;
+     musicStarted = false;
+   });
+  </script>
+ </body>
+</html>
